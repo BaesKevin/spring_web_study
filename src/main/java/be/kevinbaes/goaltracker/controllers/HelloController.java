@@ -1,4 +1,4 @@
-package be.kevinbaes.hellomvc.controllers;
+package be.kevinbaes.goaltracker.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

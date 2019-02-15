@@ -1,4 +1,4 @@
-package be.kevinbaes.hellomvc.config;
+package be.kevinbaes.goaltracker.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("be.kevinbaes.hellomvc")
+@ComponentScan("be.kevinbaes.goaltracker")
 public class WebConfig implements WebMvcConfigurer {
     @Bean
     public ViewResolver viewResolver() {

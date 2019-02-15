@@ -1,4 +1,4 @@
-package be.kevinbaes.hellomvc.config;
+package be.kevinbaes.goaltracker.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
