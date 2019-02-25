@@ -1,6 +1,7 @@
 package be.kevinbaes.goaltracker.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -10,6 +11,7 @@ public class Goal {
     private long id;
 
     @Column
+    @NotEmpty
     private String name;
 
     @Column

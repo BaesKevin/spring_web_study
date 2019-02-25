@@ -1,7 +1,7 @@
 package be.kevinbaes.goaltracker.controllers;
 
 import be.kevinbaes.goaltracker.entities.Goal;
-import be.kevinbaes.goaltracker.repositories.GoalRepository;
+import be.kevinbaes.goaltracker.services.GoalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanInstantiationException;
@@ -23,19 +23,19 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/goal")
 public class GoalController {
-    private GoalRepository goalRepository;
+    private GoalService goalService;
     private Logger logger = LoggerFactory.getLogger(GoalController.class);
 
     @ModelAttribute
     public void populateModel(Model model) {
         logger.debug("populating model");
         model.addAttribute("goal", new Goal(""));
-        model.addAttribute("goals", goalRepository.findAll());
+        model.addAttribute("goals", goalService.findAll());
     }
 
     @Autowired
-    public void setGoalRepository(GoalRepository goalRepository) {
-        this.goalRepository = goalRepository;
+    public void setGoalService(GoalService goalService) {
+        this.goalService = goalService;
     }
 
     @GetMapping
@@ -54,15 +54,15 @@ public class GoalController {
             logger.debug("goal has errors");
             return "/goal/create";
         }
-        goalRepository.save(goal);
+        goalService.save(goal);
         return "redirect:/goal";
     }
 
     @PostConstruct
     public void initData() {
-        if(goalRepository == null){
+        if(goalService == null){
             throw new BeanInstantiationException(GoalController.class, "goalDao not set");
         }
-        goalRepository.save(new Goal("A new goal"));
+        goalService.save(new Goal("A new goal"));
     }
 }
