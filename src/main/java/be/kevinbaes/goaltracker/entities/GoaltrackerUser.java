@@ -4,7 +4,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class GoaltrackerUser implements UserDetails {
@@ -24,7 +26,12 @@ public class GoaltrackerUser implements UserDetails {
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
 
-    public GoaltrackerUser() {}
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Goal> goals;
+
+    public GoaltrackerUser() {
+        this("", "", new ArrayList<>());
+    }
 
     public GoaltrackerUser(String username, String password, Collection<GrantedAuthority> authorities) {
         this(username, password, authorities, true, true, true, true);
@@ -38,6 +45,8 @@ public class GoaltrackerUser implements UserDetails {
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
+
+        this.goals = new ArrayList<>();
     }
 
     @Override
@@ -73,5 +82,13 @@ public class GoaltrackerUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isEnabled;
+    }
+
+    public List<Goal> getGoals() {
+        return goals;
+    }
+
+    public void setGoals(List<Goal> goals) {
+        this.goals = goals;
     }
 }

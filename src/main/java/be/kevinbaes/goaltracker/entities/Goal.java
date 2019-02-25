@@ -17,6 +17,9 @@ public class Goal {
     @Column
     private Date dateCompleted;
 
+    @ManyToOne
+    private GoaltrackerUser owner;
+
     public long getId() {
         return id;
     }
@@ -47,5 +50,13 @@ public class Goal {
 
     public void setDateCompleted(Date dateCompleted) {
         this.dateCompleted = dateCompleted;
+    }
+
+    public GoaltrackerUser getOwner() {
+        return owner;
+    }
+
+    public void setOwner(GoaltrackerUser owner) {
+        this.owner = owner;
     }
 }
