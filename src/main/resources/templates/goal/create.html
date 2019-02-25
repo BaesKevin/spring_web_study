@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Goal</title>
+</head>
+<body>
+<h1>Create a goal</h1>
+
+<form th:action="@{/goal/create}" th:object="${goal}" method="post">
+    <input type="text" th:field="*{name}" />
+    <ul>
+        <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+    </ul>
+
+    <input type="submit" value="Save goal">
+</form>
+</body>
+</html>
