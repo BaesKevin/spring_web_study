@@ -13,10 +13,13 @@
     <tr>
         <th>Id</th>
         <th>Name</th>
+        <th></th>
     </tr>
-    <tr th:each="goal : ${goals}">
-        <td th:text="${goal.id}"></td>
-        <td th:text="${goal.name}"></td>
+    <tr th:each="goal : ${goals}" th:object="${goal}">
+        <td th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+        <!--This is a literal substitution with an object selector to producs /goal/1 for a goal with id 1-->
+        <td><a th:href="@{|/goal/*{id}|}">Detail</a></td>
     </tr>
 </table>
 </body>

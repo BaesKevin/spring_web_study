@@ -11,10 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -66,6 +63,15 @@ public class GoalController {
 
         goalService.save(goal);
         return "redirect:/goal";
+    }
+
+    @GetMapping("/{id}")
+    public String goalDetail(@PathVariable long id, Model model) {
+        Goal goal = goalService.findById(id);
+
+        model.addAttribute("goal", goal);
+
+        return "/goal/detail";
     }
 
     @PostConstruct

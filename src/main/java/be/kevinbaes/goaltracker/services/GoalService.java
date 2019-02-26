@@ -25,6 +25,10 @@ public class GoalService {
         return goalRepository.save(goal);
     }
 
+    public Goal findById(long id) {
+        return goalRepository.findById(id).get();
+    }
+
     @PostConstruct
     public void initData() {
         if(goalRepository == null){

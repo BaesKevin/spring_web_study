@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${goal.name}">Goal detail</title>
+</head>
+<body>
+<h1 th:text="${goal.name}">Goal detail</h1>
+
+<p>Name: <span th:text="${goal.name}"></span></p>
+
+<a href="/goal" th:href="@{/goal}">Overview</a>
+</body>
+</html>
