@@ -7,16 +7,20 @@
 <body>
 <h1>Register</h1>
 
-<form action="/register" th:action="@{/register}" th:object="${user}" method="post">
-    <ul th:if="${#fields.hasErrors('*')}">
+<form th:action="@{/register}" th:object="${registration}" method="post">
+    <ul>
         <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
     </ul>
 
-    <label>Username</label>
-    <input type="text" th:field="*{username}" />
+    <label for="username">Username</label>
+    <input type="text" id="username" th:field="*{username}" />
 
-    <label>Password</label>
-    <input type="text" th:field="*{password}" />
+    <label for="password">Password</label>
+    <input type="password" id="password"  th:field="*{password}" />
+
+
+    <label for="passwordRepeat">Repeat Password</label>
+    <input type="password" id="passwordRepeat" th:field="*{passwordRepeat}" />
 
     <input type="submit" value="register" />
 </form>

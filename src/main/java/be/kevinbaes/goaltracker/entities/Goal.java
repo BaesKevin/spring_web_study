@@ -11,7 +11,7 @@ public class Goal {
     private long id;
 
     @Column
-    @NotEmpty
+    @NotEmpty(message = "Name can't be empty")
     private String name;
 
     @Column

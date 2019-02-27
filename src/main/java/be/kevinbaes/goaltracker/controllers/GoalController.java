@@ -26,12 +26,13 @@ import java.security.Principal;
 public class GoalController {
     private GoalService goalService;
     private Logger logger = LoggerFactory.getLogger(GoalController.class);
+    private static final String KEY_GOAL = "goal";
+    private static final String KEY_GOALS = "goals";
 
     @ModelAttribute
     public void populateModel(Model model) {
         logger.debug("populating model");
-        model.addAttribute("goal", new Goal(""));
-        model.addAttribute("goals", goalService.findAll());
+        model.addAttribute(KEY_GOALS, goalService.findAll());
     }
 
     @Autowired
@@ -45,14 +46,15 @@ public class GoalController {
     }
 
     @GetMapping("/create")
-    public String getCreateForm() {
+    public String getCreateForm(Model model) {
+        model.addAttribute(KEY_GOAL, new Goal(""));
         return "goal/create";
     }
 
+    // here @ModelAttribute is not necessary because the automatically generated key is the same as the key we are using
     @PostMapping("/create")
     public String createGoal(@Valid Goal goal, BindingResult result, Principal principal) {
         if(result.hasErrors()) {
-            logger.debug("goal has errors");
             return "/goal/create";
         }
 
